@@ -17,17 +17,21 @@ def start(store_obj: Store):
         choice = input("\nEnter your choice (1-4): ").strip()
 
         if choice == "1":
-            print("\n--- Active Products in Store ---")
+
+            print("------")
             active_products = store_obj.get_active_products()
             if not active_products:
                 print("No products available.")
             else:
-                for p in active_products:
+                for idx, p in enumerate(active_products, start=1):
+                    print(f"{idx}. ", end="")
                     p.show()
+
+            print("------")
 
         elif choice == "2":
             total_qty = store_obj.get_total_quantity()
-            print(f"\n📦 Total quantity of items in store: {total_qty}")
+            print(f"Total of items in store: {total_qty}")
 
         elif choice == "3":
             print("\n--- Make an Order ---")
@@ -36,8 +40,8 @@ def start(store_obj: Store):
                 print("No products available to order.")
                 continue
 
-            for idx, p in enumerate(active_products):
-                print(f"{idx + 1}. {p.name} — Price: ${p.price}, Stock: {p.quantity}")
+            for idx, p in enumerate(active_products, start=1):
+                print(f"{idx}. {p.name} — Price: ${p.price}, Stock: {p.quantity}")
 
             try:
                 prod_idx = int(input("Select product number to buy: ")) - 1
@@ -50,14 +54,13 @@ def start(store_obj: Store):
                     print(f"✅ Order successful! Total cost: ${total_cost}")
                 else:
                     print("❌ Invalid product number selected.")
-            except ValueError as e:
-                print(f"❌ Error: {e}. Please enter valid numbers.")
+            except ValueError:
+                print("❌ Please enter a valid number.")
 
         elif choice == "4":
-            print("\nExiting store system. Goodbye!")
             break
         else:
-            print("❌ Invalid choice. Please enter a number between 1 and 4.")
+            print("Invalid choice. Please enter a number between 1 and 4.")
 
 
 def main():

@@ -15,6 +15,10 @@ class Store:
     def remove_product(self, product):
         self.products.remove(product)
 
+    def get_active_products(self) -> list[Product]:
+        """Returns a list of all products where is_active() is True."""
+        return [product for product in self.products if product.is_active()]
+    
     def get_total_quantity(self) -> int:
         """Returns the total quantity of all products combined in the store."""
         return sum(product.quantity for product in self.products)
