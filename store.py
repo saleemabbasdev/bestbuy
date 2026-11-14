@@ -4,9 +4,11 @@ from products import Product
 
 class Store:
 
+    # Intitialization
     def __init__(self, products: list[Product]):
         self.products = products
 
+    # Methods
     def add_product(self, product):
         self.products.append(product)
 
@@ -21,18 +23,16 @@ class Store:
         """Returns a list of all products where is_active() is True."""
         return [product for product in self.products if product.is_active()]
 
+    def order(self, shopping_list: list) -> float:
+        """
+        Takes a list of tuples in the format (Product, quantity).
+        Buys each product, updates inventory, and returns the total order price.
+        """
+        total_price = 0.0
+        for product, quantity in shopping_list:
+            total_price += product.buy(quantity)
 
-def order(self, shopping_list: list[tuple]) -> float:
-    """
-    Takes a list of tuples in the format (Product, quantity).
-    Buys each product, updates inventory, and returns the total order price.
-    """
-    total_price = 0.0
-    for product, quantity in shopping_list:
-        # Calls the product's buy method which handles stock validation and cost calculation
-        total_price += product.buy(quantity)
-
-    return float(total_price)
+        return float(total_price)
 
 
 if __name__ == "__main__":

@@ -57,8 +57,6 @@ class Product:
 
         return float(total_price)
 
-    # Execution entry point
-
 
 if __name__ == "__main__":
     bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
